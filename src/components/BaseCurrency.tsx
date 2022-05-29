@@ -14,7 +14,7 @@ export const BaseCurrency = () => {
     setAge(event.target.value as string);
   };
   return (
-    <Box sx={{ width: 200, margin: "20px 20px 20px 20px" }}>
+    <Box sx={{ minWidth: "fit-content", margin: "20px 20px 20px 20px" }}>
       <FormControl fullWidth>
         <InputLabel id="base_currency_label">Select base currency</InputLabel>
         <Select

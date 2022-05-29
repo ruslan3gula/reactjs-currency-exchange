@@ -39,3 +39,6 @@ p {
   border-radius: 6px;
   height: 36px;
 }
+.currency_input {
+  display: flex;
+}
