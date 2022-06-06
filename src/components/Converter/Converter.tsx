@@ -20,11 +20,12 @@ import {
   CurrencyPlainText,
 } from "../styled/Converter.styled";
 
+import { Spinner } from "../../core/others/Spinner";
+
 export const Converter = () => {
   const [amount, setAmount] = useState("");
   const [to, setTo] = useState("");
   const [from, setFrom] = useState("");
-  const [result, setResult] = useState();
 
   const conversionResult = useTypedSelector(
     (state) => state.convert.convertData
@@ -34,7 +35,8 @@ export const Converter = () => {
     (state) => state.convert.convertData.data.info.time
   );
 
-  console.log(conversionTime && new Date(conversionTime));
+  const isLoading = useTypedSelector((state) => state.convert.isLoading);
+
   const dispatch = useDispatch();
 
   const convertViaRedux = () => {
@@ -49,60 +51,68 @@ export const Converter = () => {
   };
 
   return (
-    <CurrencyContainer>
-      <CurrencyDisplay>
-        <CurrencyPlainText>
-          {amount} {from} дорівнює
-        </CurrencyPlainText>
-        <CurrencyValue>
-          {Number(conversionResult.data?.result).toFixed(2)}
-          <span className="result_currency"> {to}</span>
-        </CurrencyValue>
-        <p className="currency_date">{conversionTime && conversionTime}</p>
-      </CurrencyDisplay>
-      <CurrencyInput>
-        <Currency1
-          type="text"
-          placeholder="base currency"
-          value={amount}
-          onChange={(e) => setAmount(e.target.value)}
-        />
-        <Box sx={{ minWidth: 120 }}>
-          <FormControl fullWidth>
-            <InputLabel id="demo-simple-select-label">FROM</InputLabel>
-            <Select
-              labelId="demo-simple-select-label"
-              id="demo-simple-select"
-              value={from}
-              label="Age"
-              onChange={handleChangeFrom}
-            >
-              {currencies.map((item) => (
-                <MenuItem value={item}>{item}</MenuItem>
-              ))}
-            </Select>
-          </FormControl>
-        </Box>
-        <Box sx={{ minWidth: 120 }}>
-          <FormControl fullWidth>
-            <InputLabel id="demo-simple-select-label">TO</InputLabel>
-            <Select
-              labelId="demo-simple-select-label"
-              id="demo-simple-select"
-              value={to}
-              label="Age"
-              onChange={handleChangeTo}
-            >
-              {currencies.map((item: any) => (
-                <MenuItem value={item}>{item}</MenuItem>
-              ))}
-            </Select>
-          </FormControl>
-        </Box>
-        <Button variant="contained" onClick={convertViaRedux}>
-          Convert
-        </Button>
-      </CurrencyInput>
-    </CurrencyContainer>
+    <div>
+      {isLoading ? (
+        <div style={{ margin: "0 auto", width: "500px" }}>
+          <Spinner />
+        </div>
+      ) : (
+        <CurrencyContainer>
+          <CurrencyDisplay>
+            <CurrencyPlainText>
+              {amount} {from} дорівнює
+            </CurrencyPlainText>
+            <CurrencyValue>
+              {Number(conversionResult.data?.result).toFixed(2)}
+              <span className="result_currency"> {to}</span>
+            </CurrencyValue>
+            <p className="currency_date">{conversionTime && conversionTime}</p>
+          </CurrencyDisplay>
+          <CurrencyInput>
+            <Currency1
+              type="text"
+              placeholder="base currency"
+              value={amount}
+              onChange={(e) => setAmount(e.target.value)}
+            />
+            <Box sx={{ minWidth: 120 }}>
+              <FormControl fullWidth>
+                <InputLabel id="demo-simple-select-label">FROM</InputLabel>
+                <Select
+                  labelId="demo-simple-select-label"
+                  id="demo-simple-select"
+                  value={from}
+                  label="Age"
+                  onChange={handleChangeFrom}
+                >
+                  {currencies.map((item) => (
+                    <MenuItem value={item}>{item}</MenuItem>
+                  ))}
+                </Select>
+              </FormControl>
+            </Box>
+            <Box sx={{ minWidth: 120 }}>
+              <FormControl fullWidth>
+                <InputLabel id="demo-simple-select-label">TO</InputLabel>
+                <Select
+                  labelId="demo-simple-select-label"
+                  id="demo-simple-select"
+                  value={to}
+                  label="Age"
+                  onChange={handleChangeTo}
+                >
+                  {currencies.map((item: any) => (
+                    <MenuItem value={item}>{item}</MenuItem>
+                  ))}
+                </Select>
+              </FormControl>
+            </Box>
+            <Button variant="contained" onClick={convertViaRedux}>
+              Convert
+            </Button>
+          </CurrencyInput>
+        </CurrencyContainer>
+      )}
+    </div>
   );
 };
