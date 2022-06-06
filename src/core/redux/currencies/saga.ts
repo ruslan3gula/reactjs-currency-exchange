@@ -1,7 +1,7 @@
 import { call, put, takeLatest, all } from "redux-saga/effects";
 import * as Effects from "redux-saga/effects";
 
-import webApi from "../../services/webApi";
+import webApi from "../store/services/webApi";
 import {
   fetchRates,
   fetchRatesError,

@@ -4,12 +4,17 @@ import {
   ConverterResponse,
   ConverterStore,
   ConvertParams,
-} from "../../interfaces/convert-interface";
+} from "../../types/convert";
 
 const initialState: ConverterStore = {
   isLoading: false,
   error: null,
-  convertData: { query: {}, info: {}, result: null, text: "" },
+  convertData: {
+    query: {},
+    data: { result: "", info: { time: 0 } },
+    result: null,
+    text: "",
+  },
 };
 
 const convertDataSlice = createSlice({
@@ -27,6 +32,7 @@ const convertDataSlice = createSlice({
       action: PayloadAction<ConverterResponse>
     ) => {
       state.isLoading = false;
+
       state.convertData = action.payload;
     },
     fetchConvertError: (

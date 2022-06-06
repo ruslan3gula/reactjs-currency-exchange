@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 
 import "./Converter.css";
-import { useTypedSelector } from "../core/hooks/useTypedSelector";
+
 import { useDispatch } from "react-redux";
 import axios from "axios";
 import Button from "@mui/material/Button";
@@ -11,7 +11,9 @@ import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
-import { currencies } from "../core/constants/currenciesArray";
+import { currencies } from "../../core/constants/currenciesArray";
+import { fetchConvert } from "../../core/redux/converter/convertSlice";
+import { useTypedSelector } from "../../core/hooks/useTypedSelector";
 
 export const Converter = () => {
   const [amount, setAmount] = useState("");
@@ -19,34 +21,26 @@ export const Converter = () => {
   const [from, setFrom] = useState("");
   const [result, setResult] = useState();
 
+  const conversionResult = useTypedSelector(
+    (state) => state.convert.convertData
+  );
+
+  const conversionTime = useTypedSelector(
+    (state) => state.convert.convertData.data.info.time
+  );
+
+  console.log(conversionTime && new Date(conversionTime));
   const dispatch = useDispatch();
-  // useEffect(() => {
-  //   dispatch({amount,to,from});
-  // }, []);
+
+  const convertViaRedux = () => {
+    dispatch(fetchConvert({ amount, to, from }));
+  };
 
   const handleChangeFrom = (event: SelectChangeEvent) => {
     setFrom(event.target.value as string);
   };
   const handleChangeTo = (event: SelectChangeEvent) => {
     setTo(event.target.value as string);
-  };
-
-  // useEffect(() => {
-  //   axios
-  //     .get(
-  //       "https://v1.nocodeapi.com/ruslan3gula/cx/TagsSjLltDAcrHCx/rates/convert?",
-  //       { params: { amount, from, to } }
-  //     )
-  //     .then((res) => console.log(res));
-  // }, []);
-
-  const convert = async () => {
-    const result = await axios
-      .get(
-        "https://v1.nocodeapi.com/ruslan3gula/cx/TagsSjLltDAcrHCx/rates/convert?",
-        { params: { amount, from, to } }
-      )
-      .then((res) => setResult(res.data.result.toFixed(2)));
   };
 
   return (
@@ -56,10 +50,10 @@ export const Converter = () => {
           {amount} {from} дорівнює
         </p>
         <p className="currency_value">
-          {result}
+          {Number(conversionResult.data?.result).toFixed(2)}
           <span className="result_currency"> {to}</span>
         </p>
-        <p className="currency_date">23 трав., 19:05 UTC </p>
+        <p className="currency_date">{conversionTime && conversionTime}</p>
       </div>
       <div className="currency_input">
         <input
@@ -95,13 +89,13 @@ export const Converter = () => {
               label="Age"
               onChange={handleChangeTo}
             >
-              {currencies.map((item) => (
+              {currencies.map((item: any) => (
                 <MenuItem value={item}>{item}</MenuItem>
               ))}
             </Select>
           </FormControl>
         </Box>
-        <Button variant="contained" onClick={convert}>
+        <Button variant="contained" onClick={convertViaRedux}>
           Convert
         </Button>
       </div>

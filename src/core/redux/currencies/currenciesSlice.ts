@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-import { Rates, RatesData } from "../../interfaces/currency-interface";
+import { Rates, RatesData } from "../../types/currency";
 
 const initialState: RatesData = {
   isLoading: false,

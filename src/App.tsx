@@ -8,10 +8,9 @@ import Tabs from "@mui/material/Tabs";
 import "./App.css";
 
 import { Converter } from "./components/Converter";
-import { Currencies } from "./components/Currencies";
-import { BaseCurrency } from "./components/BaseCurrency";
+import { Currencies } from "./components/Currencies/Currencies";
 
-function App() {
+export const App = () => {
   const [value, setValue] = React.useState("one");
 
   const handleChange = (event: React.SyntheticEvent, newValue: string) => {
@@ -29,9 +28,6 @@ function App() {
             currencies
           </Link>
         </Box>
-        <div className="basCurrency">
-          <BaseCurrency />
-        </div>
 
         <Routes>
           <Route path="converter" element={<Converter />} />
@@ -40,6 +36,4 @@ function App() {
       </BrowserRouter>
     </div>
   );
-}
-
-export default App;
+};

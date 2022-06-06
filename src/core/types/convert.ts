@@ -1,18 +1,18 @@
-export interface ConverterResponse {
+export type ConverterResponse = {
   query: {};
-  info: {};
+  data: { result?: string; info: { time?: number } };
   result: number | null;
   text: string;
-}
+};
 
-export interface ConverterStore {
+export type ConverterStore = {
   isLoading: boolean;
   error: null | string;
   convertData: ConverterResponse;
-}
+};
 
-export interface ConvertParams {
+export type ConvertParams = {
   amount: string;
   from: string;
   to: string;
-}
+};

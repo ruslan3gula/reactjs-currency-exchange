@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import { fetchRates } from "../core/redux/currencies/currenciesSlice";
-import { useTypedSelector } from "../core/hooks/useTypedSelector";
+import { fetchRates } from "../../core/redux/currencies/currenciesSlice";
+import { useTypedSelector } from "../../core/hooks/useTypedSelector";
 
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
@@ -12,7 +12,7 @@ import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import axios from "axios";
 
-function repackArray(data: any) {
+const repackArray = (data: any) => {
   const result = [];
 
   if (data) {
@@ -22,14 +22,14 @@ function repackArray(data: any) {
     }
     return result;
   }
-}
+};
 
 export const Currencies = () => {
   const dispatch = useDispatch();
   const currencies = useTypedSelector((state) => state.rates.ratesData.rates);
 
   const preparedCurrencies = repackArray(currencies);
-  console.log(preparedCurrencies);
+
   useEffect(() => {
     dispatch(fetchRates());
   }, []);

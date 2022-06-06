@@ -8,6 +8,9 @@ const instance: AxiosInstance = axios.create(instanceConfig);
 
 export default {
   getRates: () => instance.get("rates"),
-  convert: (amount: any, from: any, to: any) =>
-    instance.get("rates/convert?", { params: { amount, from, to } }),
+  convert: (params: {}) => {
+    return instance.get("rates/convert", {
+      params,
+    });
+  },
 };
