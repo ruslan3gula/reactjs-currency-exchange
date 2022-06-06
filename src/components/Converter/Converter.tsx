@@ -1,9 +1,6 @@
 import React, { useEffect, useState } from "react";
 
-import "./Converter.css";
-
 import { useDispatch } from "react-redux";
-import axios from "axios";
 import Button from "@mui/material/Button";
 
 import Box from "@mui/material/Box";
@@ -14,6 +11,14 @@ import Select, { SelectChangeEvent } from "@mui/material/Select";
 import { currencies } from "../../core/constants/currenciesArray";
 import { fetchConvert } from "../../core/redux/converter/convertSlice";
 import { useTypedSelector } from "../../core/hooks/useTypedSelector";
+import { CurrencyContainer } from "../styled/Converter.styled";
+import {
+  CurrencyDisplay,
+  CurrencyInput,
+  CurrencyValue,
+  Currency1,
+  CurrencyPlainText,
+} from "../styled/Converter.styled";
 
 export const Converter = () => {
   const [amount, setAmount] = useState("");
@@ -44,21 +49,20 @@ export const Converter = () => {
   };
 
   return (
-    <div className="currency_container">
-      <div className="currency_display">
-        <p className="currency_plain_text">
+    <CurrencyContainer>
+      <CurrencyDisplay>
+        <CurrencyPlainText>
           {amount} {from} дорівнює
-        </p>
-        <p className="currency_value">
+        </CurrencyPlainText>
+        <CurrencyValue>
           {Number(conversionResult.data?.result).toFixed(2)}
           <span className="result_currency"> {to}</span>
-        </p>
+        </CurrencyValue>
         <p className="currency_date">{conversionTime && conversionTime}</p>
-      </div>
-      <div className="currency_input">
-        <input
+      </CurrencyDisplay>
+      <CurrencyInput>
+        <Currency1
           type="text"
-          className="currency_1"
           placeholder="base currency"
           value={amount}
           onChange={(e) => setAmount(e.target.value)}
@@ -98,7 +102,7 @@ export const Converter = () => {
         <Button variant="contained" onClick={convertViaRedux}>
           Convert
         </Button>
-      </div>
-    </div>
+      </CurrencyInput>
+    </CurrencyContainer>
   );
 };
