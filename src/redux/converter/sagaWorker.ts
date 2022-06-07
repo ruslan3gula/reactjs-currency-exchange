@@ -1,12 +1,11 @@
 import { call, put, takeLatest, all } from "redux-saga/effects";
-import * as Effects from "redux-saga/effects";
 
 import webApi from "../store/services/webApi";
 import {
   fetchConvert,
   fetchConvertError,
   fetchConvertSuccess,
-} from "../converter/convertSlice";
+} from "./convertSlice";
 
 type ConvertParams = {
   payload: { amount: string; from: string; to: string };

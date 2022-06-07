@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { fetchRates } from "../../core/redux/currencies/currenciesSlice";
-import { useTypedSelector } from "../../core/hooks/useTypedSelector";
+import { fetchRates } from "../../redux/currencies/currenciesSlice";
+import { useTypedSelector } from "../../hooks/useTypedSelector";
 
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
@@ -10,7 +10,7 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
-import { Spinner } from "../../core/others/Spinner";
+import { Spinner } from "../../others/Spinner";
 
 const repackArray = (data: any) => {
   const result = [];

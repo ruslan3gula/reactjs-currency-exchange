@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 
 import { useDispatch } from "react-redux";
 import Button from "@mui/material/Button";
@@ -8,19 +8,19 @@ import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
-import { currencies } from "../../core/constants/currenciesArray";
-import { fetchConvert } from "../../core/redux/converter/convertSlice";
-import { useTypedSelector } from "../../core/hooks/useTypedSelector";
-import { CurrencyContainer } from "../styled/Converter.styled";
+import { currencies } from "../../constants/currenciesArray";
+import { fetchConvert } from "../../redux/converter/convertSlice";
+import { useTypedSelector } from "../../hooks/useTypedSelector";
 import {
   CurrencyDisplay,
   CurrencyInput,
   CurrencyValue,
   Currency1,
   CurrencyPlainText,
-} from "../styled/Converter.styled";
+  CurrencyContainer,
+} from "../index";
 
-import { Spinner } from "../../core/others/Spinner";
+import { Spinner } from "../../others/Spinner";
 
 export const Converter = () => {
   const [amount, setAmount] = useState("");

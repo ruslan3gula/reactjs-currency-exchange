@@ -1,14 +1,11 @@
 import { call, put, takeLatest, all } from "redux-saga/effects";
-import * as Effects from "redux-saga/effects";
 
 import webApi from "../store/services/webApi";
 import {
   fetchRates,
   fetchRatesError,
   fetchRatesSuccess,
-} from "../currencies/currenciesSlice";
-
-// const call: any = Effects.call;
+} from "./currenciesSlice";
 
 function* getCurrencies() {
   try {

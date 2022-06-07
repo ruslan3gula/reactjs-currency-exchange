@@ -1,8 +1,8 @@
 import { combineReducers } from "redux";
 
-import ratesDataSlice from "../redux/currencies/currenciesSlice";
+import ratesDataSlice from "./currencies/currenciesSlice";
 
-import convertDataSlice from "../redux/converter/convertSlice";
+import convertDataSlice from "./converter/convertSlice";
 
 export const rootReducer = combineReducers({
   rates: ratesDataSlice,

@@ -3,11 +3,9 @@ import React from "react";
 import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
 
 import Box from "@mui/material/Box";
-import Tab from "@mui/material/Tab";
-import Tabs from "@mui/material/Tabs";
 
-import { Converter } from "../Converter/Converter";
-import { Currencies } from "../Currencies/Currencies";
+import { Converter } from "../components/index";
+import { Currencies } from "../components/index";
 
 export const MainRouter = () => {
   return (

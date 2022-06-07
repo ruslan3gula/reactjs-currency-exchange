@@ -1,6 +1,6 @@
 import { fork } from "redux-saga/effects";
-import { sagaCurrencies } from "../redux/currencies/saga";
-import { sagaConvert } from "../redux/converter/saga";
+import { sagaCurrencies } from "./currencies/sagaWorker";
+import { sagaConvert } from "./converter/sagaWorker";
 
 export function* rootSaga() {
   yield fork(sagaCurrencies);
