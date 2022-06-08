@@ -11,7 +11,7 @@ type ConvertParams = {
   payload: { amount: string; from: string; to: string };
 };
 
-function* getConvert({ payload }: ConvertParams) {
+function* getConvertWorker({ payload }: ConvertParams) {
   try {
     //@ts-ignore
     const data = yield call(webApi.convert, payload);
@@ -21,6 +21,6 @@ function* getConvert({ payload }: ConvertParams) {
   }
 }
 
-export function* sagaConvert() {
-  yield all([takeLatest<any>(fetchConvert, getConvert)]);
+export function* sagaConvertWatcher() {
+  yield all([takeLatest<any>(fetchConvert, getConvertWorker)]);
 }

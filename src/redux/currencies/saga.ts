@@ -7,7 +7,7 @@ import {
   fetchRatesSuccess,
 } from "./currenciesSlice";
 
-function* getCurrencies() {
+function* getCurrenciesWorker() {
   try {
     //@ts-ignore
     const { data } = yield call(webApi.getRates);
@@ -18,6 +18,6 @@ function* getCurrencies() {
   }
 }
 
-export function* sagaCurrencies() {
-  yield all([takeLatest<any>(fetchRates, getCurrencies)]);
+export function* sagaCurrenciesWatcher() {
+  yield all([takeLatest<any>(fetchRates, getCurrenciesWorker)]);
 }

@@ -18,9 +18,8 @@ import {
   Currency1,
   CurrencyPlainText,
   CurrencyContainer,
+  Spinner,
 } from "../index";
-
-import { Spinner } from "../../others/Spinner";
 
 export const Converter = () => {
   const [amount, setAmount] = useState("");
